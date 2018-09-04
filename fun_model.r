@@ -97,8 +97,20 @@ fun_tweedie_profile <-  function(dt,target_var){
 }
 # object <- fit_tweedie
 
-fun_rmInvariant <- function(dt,predictors){
+fun_findVariantCols <- function(dt){
+  len_unique <- sapply(dt,function(x)length(unique(x)))
+  rm_col_index <- which(len_unique == 1) 
+  all_cols<- colnames(dt)
+  cols <- all_cols 
+  if(length(rm_col_index)>0){
+    cols <- cols[-rm_col_index]
+  }
+  out <- NULL
+  out$variant_cols <-cols
   
+  "%ni%" <- Negate("%in%")
+  out$invariant_cols <- all_cols[all_cols %ni% cols]
+  
+  out
 }
-
 
