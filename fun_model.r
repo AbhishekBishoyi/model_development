@@ -6,10 +6,24 @@ fun_idLinearComb <- function(dt){
 }
 
 
-fun_checkNumericColumns <- function(dt){
+
+fun_whichNumericColumns <- function(dt){
   all_col <- sapply(dt,is.numeric)  
-  which(all_col == FALSE)
+  attributes(which(all_col == TRUE))$name
 }
+
+fun_whichFactorColumns <- function(dt){
+  all_col <- sapply(dt,is.factor)  
+  attributes(which(all_col == TRUE))$name
+}
+
+fun_whichFactorColumnsForModel <- function(dt){
+  all_col <- sapply(dt,levels)
+  all_col <- sapply(all_col,length)
+  attributes(which(all_col >=2 & all_col <=20))$name
+  
+}
+
 
 
 fun_ismissing <- function(dt){
